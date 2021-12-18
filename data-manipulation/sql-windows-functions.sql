@@ -20,6 +20,11 @@ SELECT *,
 SUM(salary) OVER(PARTITION BY job ORDER BY salary DESC) AS ordered_job_salary
 FROM windowFunctions;
 
+-- Number rows using row_number
+SELECT *, ROW_NUMBER() OVER(ORDER BY NAME) AS "row_number" FROM windowFunctions;
+
+-- Number rows within each partition
+SELECT *, ROW_NUMBER() OVER(PARTITION BY job ORDER BY salary) AS "partition_row_number" FROM windowFunctions;
 
 
 
