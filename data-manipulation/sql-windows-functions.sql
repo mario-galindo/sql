@@ -26,5 +26,15 @@ SELECT *, ROW_NUMBER() OVER(ORDER BY NAME) AS "row_number" FROM windowFunctions;
 -- Number rows within each partition
 SELECT *, ROW_NUMBER() OVER(PARTITION BY job ORDER BY salary) AS "partition_row_number" FROM windowFunctions;
 
+-- Rank rows within each partition using rank function 
+SELECT *, 
+ROW_NUMBER() OVER(PARTITION BY job ORDER BY salary) AS "row_number",
+RANK() OVER(PARTITION BY job ORDER BY salary) AS "rank_row" 
+from windowFunctions;
 
-
+-- Rank rows within each partition using dense_rank function*/
+SELECT *, 
+ROW_NUMBER() OVER(PARTITION BY job ORDER BY salary) AS "row_number",
+RANK() OVER(PARTITION BY job ORDER BY salary) AS "rank_row",
+DENSE_RANK() OVER(PARTITION BY job ORDER BY salary) AS "dense_rank_row"
+FROM windowFunctions;
