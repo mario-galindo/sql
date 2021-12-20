@@ -48,3 +48,9 @@ FROM windowFunctions;
 SELECT *,
 LEAD(salary, 1) OVER(PARTITION BY job ORDER BY salary) AS sal_next
 FROM windowFunctions;
+
+-- Lag values 
+SELECT *,
+LAG(salary, 1) OVER(PARTITION BY job ORDER BY salary) AS sal_previous,
+salary - LAG(salary, 1) Over(PARTITION BY job ORDER BY salary) AS sal_diff
+FROM windowFunctions;
