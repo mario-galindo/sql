@@ -38,3 +38,13 @@ ROW_NUMBER() OVER(PARTITION BY job ORDER BY salary) AS "row_number",
 RANK() OVER(PARTITION BY job ORDER BY salary) AS "rank_row",
 DENSE_RANK() OVER(PARTITION BY job ORDER BY salary) AS "dense_rank_row"
 FROM windowFunctions;
+
+-- Statistics using ntile function 
+SELECT *, 
+NTILE(4) OVER(ORDER BY salary) AS "quartile"
+FROM windowFunctions;
+
+-- Lead values 
+SELECT *,
+LEAD(salary, 1) OVER(PARTITION BY job ORDER BY salary) AS sal_next
+FROM windowFunctions;
